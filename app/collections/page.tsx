@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import {Suspense} from 'react'
 import {client} from '@/lib/sanity/client'
 import {collectionsQuery, tagsQuery} from '@/lib/queries'
 import {urlFor} from '@/lib/sanity/image'
@@ -41,7 +42,9 @@ export default async function CollectionsPage() {
       </section>
 
       <section className="px-6 pb-16">
-        <CollectionFilters styles={styles} tags={tags} />
+        <Suspense fallback={null}>
+          <CollectionFilters styles={styles} tags={tags} />
+        </Suspense>
 
         {collections.length === 0 ? (
           <div className="border border-dashed border-[var(--border)] rounded-xl py-16 text-center">
